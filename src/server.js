@@ -5,7 +5,8 @@ import session from "express-session";
 import { users } from "../utils/constants.js";
 import passport from "passport";
 import MongoStore from "connect-mongo";
-import "./strategies/local-strategy-with-mongoose.js";
+//import "./strategies/local-strategy-with-mongoose.js";
+import "./strategies/discord-strategy.js";
 import mongoose from "mongoose";
 
 const app = express();
@@ -95,4 +96,21 @@ app.use("/api/user/auth/logout", (request, response) => {
   });
 });
 
+app.get("/api/auth/discord", passport.authenticate("discord"));
+app.get(
+  "/api/auth/discord/redirect",
+  passport.authenticate("discord"),
+  (request, respone) => {
+    console.log(request.user);
+    respone.status(200).send({
+      success: true,
+      message: "Authentication successful!",
+      user: request.user,
+    });
+  }
+);
 app.listen(PORT, () => console.log(`Running on port ${PORT}!`));
+
+// Client ID 1326556942214365289
+// Client Secret Pztnmem9yQkN4G09QkokZry2LJeSu4aZ
+// redirect http://localhost:3000/api/auth/discord/redirect
