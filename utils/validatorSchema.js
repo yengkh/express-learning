@@ -37,6 +37,9 @@ export const createUserValidationsSchema = {
       errorMessage: "You must enter email!",
     },
   },
+  password: {
+    notEmpty: true,
+  },
 };
 
 export const checkUserInputEmailSchema = {

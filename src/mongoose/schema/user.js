@@ -13,7 +13,6 @@ const UserSchema = mongoose.Schema(
     email: {
       type: mongoose.Schema.Types.String,
       unique: true,
-      lowercase: true,
       validate: {
         validator: (email) => {
           return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -29,7 +28,7 @@ const UserSchema = mongoose.Schema(
       type: mongoose.Schema.Types.String,
       unique: true,
       lowercase: true,
-      required: true,
+      required: false,
     },
   },
   {

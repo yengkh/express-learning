@@ -37,8 +37,7 @@ export const postNewUser = (request, response) => {
   }
 
   const data = matchedData(request);
-  const { body } = request;
-  const user = { id: users[users.length - 1].id + 1, ...body };
+  const user = { id: users[users.length - 1].id + 1, ...data };
   users.push(user);
   return response.status(201).send({
     status: true,
